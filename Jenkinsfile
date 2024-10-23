@@ -22,7 +22,7 @@ pipeline {
         }
         
         stage('Build Application') {
-            agent { label 'Jenkin_Agent_3' } // Run this stage on Agent_3
+            agent { label 'Jenkins_Agent_3' } // Run this stage on Agent_3 (corrected label)
             steps {
                 // Build the application
                 sh 'npm run build'
@@ -30,10 +30,10 @@ pipeline {
         }
         
         stage('Deploy Application') {
-            agent { label 'Jenkin_Agent_4' } // Run this stage on Agent_4
+            agent { label 'Jenkins_Agent_4' } // Run this stage on Agent_4 (corrected label)
             environment {
                 // Use the secret securely (stored in Jenkins credentials)
-                SECRET_KEY = credentials('my-secret-key')
+                SECRET_KEY = credentials('my-secret-key')  // Ensure 'my-secret-key' is added in Jenkins credentials
             }
             steps {
                 // Deploy the application (you can change this to your actual deploy command)
