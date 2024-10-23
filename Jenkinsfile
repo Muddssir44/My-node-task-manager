@@ -43,18 +43,19 @@ pipeline {
         stage('Deploy Application') {
             agent { label 'Jenkins_Agent_4' }
             environment {
-                SECRET_KEY = credentials('Muddassir371')  // Ensure this credential exists in Jenkins
+                SECRET_FILE = credentials('MY_ENV_FILE')  // Reference to the .env file in Jenkins credentials
             }
             steps {
                 bat 'echo Deploying the application...'
-                bat 'echo Using secret key for deployment'  // Avoid printing sensitive data directly
+                bat 'type %SECRET_FILE%'  // This outputs the content of the .env file for demo
+                // Here, %SECRET_FILE% refers to the path where the .env file is temporarily stored
             }
         }
     }
 
     post {
         always {
-            node('Jenkins_Agent_1') {  // Ensure that the cleanWs() is inside a node with a specified label
+            node('Jenkins_Agent_1') { 
                 cleanWs()  // Clean the workspace after the pipeline finishes
             }
         }
