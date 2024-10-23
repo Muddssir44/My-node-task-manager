@@ -52,23 +52,16 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            agent { label 'Jenkins_Agent_1' }
-            steps {
-                echo 'Cleaning workspace...'
-                cleanWs()
-            }
-        }
-        success {
-            steps {
-                echo 'Pipeline completed successfully!'
-            }
-        }
-        failure {
-            steps {
-                echo 'Pipeline failed! Please check the logs for more information.'
-            }
-        }
+post {
+    always {
+        cleanWs()  // Clean the workspace
     }
+    success {
+        echo 'Pipeline completed successfully!'
+    }
+    failure {
+        echo 'Pipeline failed!'
+    }
+}
+
 }
