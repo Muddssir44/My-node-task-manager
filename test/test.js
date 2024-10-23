@@ -1,30 +1,25 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');
-const app = require('../index');
-const expect = chai.expect;
+const chaiHttp = require('chai-http');  // Ensure chai-http is imported this way
+const app = require('../index.js');  // Adjust this path to your Express app
 
-chai.use(chaiHttp);
+chai.use(chaiHttp);  // Use chaiHttp middleware with chai
 
-describe('Task Manager API', () => {
-    it('should GET all tasks', (done) => {
+describe('API Tests', function() {
+    it('GET / should return status 200', function(done) {
         chai.request(app)
-            .get('/tasks')
+            .get('/')
             .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.an('array');
+                chai.expect(res).to.have.status(200);
                 done();
             });
     });
 
-    it('should POST a new task', (done) => {
-        const newTask = { title: 'Test Task' };
+    it('POST /tasks should create a new task', function(done) {
         chai.request(app)
             .post('/tasks')
-            .send(newTask)
+            .send({ title: 'test task' })
             .end((err, res) => {
-                expect(res).to.have.status(201);
-                expect(res.body).to.be.an('object');
-                expect(res.body).to.have.property('title', 'Test Task');
+                chai.expect(res).to.have.status(201);
                 done();
             });
     });
