@@ -4,8 +4,8 @@
   "description": "A simple task manager API built with Node.js for Jenkins CI/CD demonstration",
   "main": "index.js",
   "scripts": {
- 
-    "test": "mocha test/test.js"
+    "start": "node index.js",
+  "test": "mocha --exit test/test.js"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
