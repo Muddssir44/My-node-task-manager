@@ -36,6 +36,10 @@ pipeline {
         stage('Run Tests') {
             agent { label 'Jenkins_Agent_2' }
             steps {
+                // Kill the process using port 3001 if it exists before running tests
+                bat 'netstat -ano | findstr :3001 | findstr LISTENING | for /f "tokens=5" %a in (\'more\') do taskkill /F /PID %a'
+                
+                // Run the tests
                 bat 'npm test'
             }
         }
