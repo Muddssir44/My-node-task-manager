@@ -6,7 +6,7 @@ pipeline {
             agent { label 'Jenkins_Agent_1' }
             steps {
                 // Fetch the 'main' branch explicitly
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Muddssir44/My-node-task-manager/tree/main']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/Muddssir44/My-node-task-manager/tree/main']]])
 
                 // Install dependencies
                 sh 'npm install'
