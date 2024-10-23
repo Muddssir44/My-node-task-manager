@@ -37,12 +37,7 @@ pipeline {
             }
         }
 
-        stage('Build Application') {
-            agent { label 'Jenkins_Agent_3' }
-            steps {
-                bat 'npm run build'
-            }
-        }
+      
 
         stage('Deploy Application') {
             agent { label 'Jenkins_Agent_4' }
