@@ -1,6 +1,6 @@
 pipeline {
-    agent none
-    
+    agent node  // Ensure an agent is available for the entire pipeline
+
     environment {
         GIT_CURL_VERBOSE = '1'
         GIT_TRACE_PACKET = '1'
@@ -52,16 +52,17 @@ pipeline {
         }
     }
 
-post {
-    always {
-        cleanWs()  // Clean the workspace
+    post {
+        always {
+            node {
+                cleanWs()  // Clean the workspace after the pipeline finishes
+            }
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
     }
-    success {
-        echo 'Pipeline completed successfully!'
-    }
-    failure {
-        echo 'Pipeline failed!'
-    }
-}
-
 }
