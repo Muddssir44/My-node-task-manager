@@ -3,7 +3,7 @@ pipeline {
     
     stages {
         stage('Install Dependencies') {
-            agent { label 'Agent_1' } // Run this stage on Agent_1
+            agent { label 'Jenkins_Agent_1' } // Run this stage on Agent_1
             steps {
                 // Checkout the Node.js application code from GitHub
                 checkout scm
@@ -14,7 +14,7 @@ pipeline {
         }
         
         stage('Run Tests') {
-            agent { label 'Agent_2' } // Run this stage on Agent_2
+            agent { label 'Jenkins_Agent_2' } // Run this stage on Agent_2
             steps {
                 // Run tests
                 sh 'npm test'
@@ -22,7 +22,7 @@ pipeline {
         }
         
         stage('Build Application') {
-            agent { label 'Agent_3' } // Run this stage on Agent_3
+            agent { label 'Jenkin_Agent_3' } // Run this stage on Agent_3
             steps {
                 // Build the application
                 sh 'npm run build'
@@ -30,7 +30,7 @@ pipeline {
         }
         
         stage('Deploy Application') {
-            agent { label 'Agent_4' } // Run this stage on Agent_4
+            agent { label 'Jenkin_Agent_4' } // Run this stage on Agent_4
             environment {
                 // Use the secret securely (stored in Jenkins credentials)
                 SECRET_KEY = credentials('my-secret-key')
