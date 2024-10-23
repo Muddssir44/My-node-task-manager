@@ -3,7 +3,7 @@ pipeline {
     
     stages {
         stage('Install Dependencies') {
-            agent { label 'Jenkins_Agent_1' } 
+            agent { label 'Jenkins_Agent_1' }
             steps {
                 // Checkout the Node.js application code from GitHub
                 checkout scm
@@ -47,15 +47,16 @@ pipeline {
     
     post {
         always {
-            // Clean up after the pipeline run
-            cleanWs()
+            agent { label 'Jenkins_Agent_1' }  // Ensure there is an agent for the post condition
+            steps {
+                // Clean up after the pipeline run
+                cleanWs()
+            }
         }
         success {
-            // Notify about the successful run
             echo 'Pipeline completed successfully!'
         }
         failure {
-            // Notify about a failure in the pipeline
             echo 'Pipeline failed!'
         }
     }
