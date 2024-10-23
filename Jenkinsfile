@@ -16,7 +16,10 @@ pipeline {
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
-                        userRemoteConfigs: [[url: 'https://github.com/Muddssir44/My-node-task-manager.git', credentialsId: '777ff811-2d26-4fd6-9ded-56d610c7b11f']],
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/Muddssir44/My-node-task-manager.git', 
+                            credentialsId: '777ff811-2d26-4fd6-9ded-56d610c7b11f'
+                        ]],
                         extensions: [[$class: 'CloneOption', noTags: false, reference: '', shallow: false, depth: 0, timeout: 10]]
                     ])
                 }
@@ -37,8 +40,6 @@ pipeline {
             }
         }
 
-      
-
         stage('Deploy Application') {
             agent { label 'Jenkins_Agent_4' }
             environment {
@@ -46,15 +47,16 @@ pipeline {
             }
             steps {
                 bat 'echo Deploying the application...'
-                bat 'echo Using secret: %SECRET_KEY%'
+                bat 'echo Using secret key for deployment'  // Avoid echoing sensitive info like the secret key
             }
         }
     }
 
     post {
         always {
-            agent { label 'Jenkins_Agent_1' }  // Ensure agent context for post steps
+            agent { label 'Jenkins_Agent_1' }
             steps {
+                echo 'Cleaning workspace...'
                 cleanWs()
             }
         }
@@ -65,7 +67,7 @@ pipeline {
         }
         failure {
             steps {
-                echo 'Pipeline failed!'
+                echo 'Pipeline failed. Please check the logs for errors.'
             }
         }
     }
