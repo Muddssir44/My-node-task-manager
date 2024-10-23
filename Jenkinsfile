@@ -1,5 +1,5 @@
 pipeline {
-    agent node  // Ensure an agent is available for the entire pipeline
+    agent any  // Ensure an agent is available for the entire pipeline
 
     environment {
         GIT_CURL_VERBOSE = '1'
@@ -54,7 +54,7 @@ pipeline {
 
     post {
         always {
-            node {
+            node('Jenkins_Agent_1') {  // Ensure that the cleanWs() is inside a node with a specified label
                 cleanWs()  // Clean the workspace after the pipeline finishes
             }
         }
