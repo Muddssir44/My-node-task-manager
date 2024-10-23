@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy Application') {
             agent { label 'Jenkins_Agent_4' }
             environment {
-                SECRET_KEY = credentials('Muddassir371/******')  // Ensure this credential exists in Jenkins
+                SECRET_KEY = credentials('Muddassir371')  // Ensure this credential exists in Jenkins
             }
             steps {
                 bat 'echo Deploying the application...'
