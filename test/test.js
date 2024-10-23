@@ -1,15 +1,21 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');  // Ensure chai-http is imported this way
-const app = require('../index.js');  // Adjust this path to your Express app
+const chaiHttp = require('chai-http');
+const app = require('../index.js');  // Your Express app
+const server = app.listen();    // Start the server manually in test
 
-chai.use(chaiHttp);  // Use chaiHttp middleware with chai
+chai.use(chaiHttp);
+const { expect } = chai;
+
+after(() => {
+    server.close();  // Close the server after the tests are done
+});
 
 describe('API Tests', function() {
     it('GET / should return status 200', function(done) {
         chai.request(app)
             .get('/')
             .end((err, res) => {
-                chai.expect(res).to.have.status(200);
+                expect(res).to.have.status(200);
                 done();
             });
     });
@@ -19,7 +25,7 @@ describe('API Tests', function() {
             .post('/tasks')
             .send({ title: 'test task' })
             .end((err, res) => {
-                chai.expect(res).to.have.status(201);
+                expect(res).to.have.status(201);
                 done();
             });
     });
