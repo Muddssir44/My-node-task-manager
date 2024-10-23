@@ -3,44 +3,44 @@ pipeline {
     
     stages {
         stage('Install Dependencies') {
-            agent { label 'Jenkins_Agent_1' } // Run this stage on Agent_1
+            agent { label 'Jenkins_Agent_1' } 
             steps {
-                // Correct Git URL for fetching code
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/Muddssir44/My-node-task-manager.git']]])
+                // Checkout the Node.js application code from GitHub
+                checkout scm
 
-                // Install dependencies using npm
-                sh 'npm install'
+                // Install dependencies using npm on Windows
+                bat 'npm install'
             }
         }
         
         stage('Run Tests') {
-            agent { label 'Jenkins_Agent_2' } // Run this stage on Agent_2
+            agent { label 'Jenkins_Agent_2' }
             steps {
-                // Run tests
-                sh 'npm test'
+                // Run tests on Windows
+                bat 'npm test'
             }
         }
         
         stage('Build Application') {
-            agent { label 'Jenkins_Agent_3' } // Run this stage on Agent_3
+            agent { label 'Jenkins_Agent_3' }
             steps {
-                // Build the application
-                sh 'npm run build'
+                // Build the application on Windows
+                bat 'npm run build'
             }
         }
         
         stage('Deploy Application') {
-            agent { label 'Jenkins_Agent_4' } // Run this stage on Agent_4
+            agent { label 'Jenkins_Agent_4' }
             environment {
                 // Use the secret securely (stored in Jenkins credentials)
                 SECRET_KEY = credentials('my-secret-key')
             }
             steps {
-                // Deploy the application (you can change this to your actual deploy command)
-                sh 'echo Deploying the application...'
+                // Deploy the application
+                bat 'echo Deploying the application...'
                 
                 // Accessing the secret key
-                sh 'echo Using secret: $SECRET_KEY'
+                bat 'echo Using secret: %SECRET_KEY%'
             }
         }
     }
