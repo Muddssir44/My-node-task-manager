@@ -1,0 +1,10 @@
+Oct 24, 2024 3:01:47 AM hudson.remoting.Launcher createEngine
+INFO: Setting up agent: Agent_3
+Oct 24, 2024 3:01:47 AM hudson.remoting.Engine startEngine
+INFO: Using Remoting version: 3273.v4cfe589b_fd83
+Oct 24, 2024 3:01:47 AM org.jenkinsci.remoting.engine.WorkDirManager initializeWorkDir
+INFO: Using C:\Agent_4\remoting as a remoting work directory
+Oct 24, 2024 3:01:47 AM hudson.remoting.Launcher$CuiListener status
+INFO: WebSocket connection open
+Oct 24, 2024 3:01:47 AM hudson.remoting.Launcher$CuiListener status
+INFO: Connected

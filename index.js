@@ -5,16 +5,15 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
-// Load environment variables from .env file
+
 dotenv.config();
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// In-memory task storage (can later be replaced with a database)
 let tasks = [];
 
 // Home route
