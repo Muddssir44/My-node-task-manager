@@ -10,7 +10,7 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            agent { label 'Jenkins_Agent_1' }
+            agent { label 'Agent_1' }
             steps {
                 retry(3) {
                     checkout([
@@ -27,23 +27,23 @@ pipeline {
         }
 
         stage('Install Dependencies') {
-            agent { label 'Jenkins_Agent_1' }
+            agent { label 'Agent_1' }
             steps {
                 bat 'npm install'
             }
         }
 
         stage('Run Tests') {
-            agent { label 'Jenkins_Agent_2' }
+            agent { label 'Agent_2' }
             steps {
                 bat 'npm test'
             }
         }
 
         stage('Deploy Application') {
-            agent { label 'Jenkins_Agent_4' }
+            agent { label 'Agent_4' }
             environment {
-                SECRET_FILE = credentials('MY_ENV_FILE')  
+                SECRET_FILE = credentials('Secrert_file')  
             }
             steps {
                 bat 'echo Deploying the application...'
@@ -55,7 +55,7 @@ pipeline {
 
     post {
         always {
-            node('Jenkins_Agent_1') { 
+            node('Agent_1') { 
                 cleanWs()  
             }
         }
