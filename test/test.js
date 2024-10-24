@@ -1,13 +1,12 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../index.js');  // Your Express app
-const server = app.listen();    // Start the server manually in test
-
+const app = require('../index.js'); 
+const server = app.listen();   
 chai.use(chaiHttp);
 const { expect } = chai;
 
 after(() => {
-    server.close();  // Close the server after the tests are done
+    server.close(); 
 });
 
 describe('API Tests', function() {

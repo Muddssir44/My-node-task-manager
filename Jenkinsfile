@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // Ensure an agent is available for the entire pipeline
+    agent any  
 
     environment {
         GIT_CURL_VERBOSE = '1'
@@ -43,12 +43,12 @@ pipeline {
         stage('Deploy Application') {
             agent { label 'Jenkins_Agent_4' }
             environment {
-                SECRET_FILE = credentials('MY_ENV_FILE')  // Reference to the .env file in Jenkins credentials
+                SECRET_FILE = credentials('MY_ENV_FILE')  
             }
             steps {
                 bat 'echo Deploying the application...'
-                bat 'type %SECRET_FILE%'  // This outputs the content of the .env file for demo
-                // Here, %SECRET_FILE% refers to the path where the .env file is temporarily stored
+                bat 'type %SECRET_FILE%'  
+             
             }
         }
     }
@@ -56,7 +56,7 @@ pipeline {
     post {
         always {
             node('Jenkins_Agent_1') { 
-                cleanWs()  // Clean the workspace after the pipeline finishes
+                cleanWs()  
             }
         }
         success {
