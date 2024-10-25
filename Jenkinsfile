@@ -41,7 +41,7 @@ pipeline {
         }
 
         stage('Deploy Application') {
-            agent { label 'Agent_4' }
+            agent { label 'Agent_3' }
             environment {
                 SECRET_FILE = credentials('Secrert_file')  
             }
