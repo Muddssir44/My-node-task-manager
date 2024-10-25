@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy Application') {
             agent { label 'Agent_3' }
             environment {
-                SECRET_FILE = credentials('Secrert_file')  
+                SECRET_FILE = credentials('My_Env_File')  
             }
             steps {
                 bat 'echo Deploying the application...'
